@@ -1,0 +1,247 @@
+{% extends "base.html" %}
+
+{% block title %}Privacy Policy — Spendly{% endblock %}
+
+{% block head %}
+<style>
+    .legal-page {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 4rem 2rem 6rem;
+    }
+    .legal-page h1 {
+        font-family: var(--font-display);
+        font-size: 2.4rem;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+    }
+    .legal-meta {
+        font-size: 0.85rem;
+        color: var(--ink-muted);
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+    .legal-section {
+        margin-bottom: 2.5rem;
+    }
+    .legal-section h2 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        color: var(--ink);
+        margin-bottom: 0.75rem;
+    }
+    .legal-section p,
+    .legal-section li {
+        font-size: 0.95rem;
+        color: var(--ink-soft);
+        line-height: 1.75;
+        margin-bottom: 0.6rem;
+    }
+    .legal-section ul {
+        padding-left: 1.4rem;
+    }
+    .legal-section ul li {
+        margin-bottom: 0.4rem;
+    }
+    .legal-highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        padding: 1rem 1.25rem;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+    }
+    .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+    .data-table th {
+        background: var(--paper-warm);
+        color: var(--ink);
+        font-weight: 600;
+        text-align: left;
+        padding: 0.6rem 0.9rem;
+        border: 1px solid var(--border);
+    }
+    .data-table td {
+        padding: 0.6rem 0.9rem;
+        border: 1px solid var(--border);
+        color: var(--ink-soft);
+        vertical-align: top;
+    }
+    .data-table tr:nth-child(even) td {
+        background: var(--paper-warm);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="legal-page">
+
+    <h1>Privacy Policy</h1>
+    <p class="legal-meta">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 1 May 2026</p>
+
+    <div class="legal-highlight">
+        Your financial data is yours. We collect only what is necessary to run the Service and never sell your personal data to third parties.
+    </div>
+
+    <div class="legal-section">
+        <h2>1. Who We Are</h2>
+        <p>
+            Spendly is a personal expense tracking application. In this Privacy Policy, "we", "us", and "our" refer to the operators of Spendly. If you have any questions, contact us at
+            <a href="mailto:privacy@spendly.app" style="color:var(--accent);text-decoration:underline;">privacy@spendly.app</a>.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>2. Information We Collect</h2>
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Data collected</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Account information</td>
+                    <td>Name, email address, hashed password</td>
+                    <td>Create and secure your account</td>
+                </tr>
+                <tr>
+                    <td>Expense data</td>
+                    <td>Amount, category, date, description</td>
+                    <td>Display your spending records to you</td>
+                </tr>
+                <tr>
+                    <td>Usage data</td>
+                    <td>Pages visited, actions taken, timestamps</td>
+                    <td>Improve the Service and fix bugs</td>
+                </tr>
+                <tr>
+                    <td>Device &amp; log data</td>
+                    <td>IP address, browser type, OS</td>
+                    <td>Security monitoring and abuse prevention</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>We do not collect payment card numbers, bank account details, or any government-issued ID.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>3. How We Use Your Information</h2>
+        <ul>
+            <li>Provide, operate, and maintain the Service.</li>
+            <li>Authenticate your identity and protect your account.</li>
+            <li>Display your expense history, summaries, and reports.</li>
+            <li>Send transactional emails (password reset, account confirmation).</li>
+            <li>Detect and prevent fraud, abuse, or security incidents.</li>
+            <li>Improve performance and fix bugs based on aggregated usage patterns.</li>
+        </ul>
+        <p>We do <strong>not</strong> use your data for advertising, profiling, or sale to third parties.</p>
+    </div>
+
+    <div class="legal-section">
+        <h2>4. Legal Basis for Processing (GDPR)</h2>
+        <p>Where applicable, we process your personal data under the following legal bases:</p>
+        <ul>
+            <li><strong>Contract performance</strong> — to deliver the Service you signed up for.</li>
+            <li><strong>Legitimate interests</strong> — security monitoring and Service improvement.</li>
+            <li><strong>Legal obligation</strong> — where required by applicable law.</li>
+            <li><strong>Consent</strong> — for optional communications such as newsletters, if offered.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>5. Data Sharing</h2>
+        <p>We do not sell or rent your personal data. We may share data only in the following limited circumstances:</p>
+        <ul>
+            <li><strong>Service providers:</strong> Trusted sub-processors (e.g. hosting, email delivery) who are contractually bound to protect your data and may only process it on our instructions.</li>
+            <li><strong>Legal compliance:</strong> If required by law, court order, or governmental authority.</li>
+            <li><strong>Business transfer:</strong> In the event of a merger or acquisition, your data may transfer to the new entity under the same privacy commitments.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>6. Data Retention</h2>
+        <p>
+            We retain your account and expense data for as long as your account is active. If you delete your account, all personal data is permanently removed within 30 days, except where retention is required by law (e.g. financial records mandated by applicable regulations).
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>7. Data Security</h2>
+        <ul>
+            <li>Passwords are stored as salted hashes — we never store plain-text passwords.</li>
+            <li>Data in transit is protected by TLS/HTTPS encryption.</li>
+            <li>Access to the database is restricted to authorised personnel only.</li>
+            <li>We conduct periodic security reviews of our infrastructure.</li>
+        </ul>
+        <p>
+            No system is perfectly secure. If you believe your account has been compromised, contact us immediately at
+            <a href="mailto:security@spendly.app" style="color:var(--accent);text-decoration:underline;">security@spendly.app</a>.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>8. Your Rights</h2>
+        <p>Depending on your location, you may have the following rights regarding your personal data:</p>
+        <ul>
+            <li><strong>Access:</strong> Request a copy of the data we hold about you.</li>
+            <li><strong>Correction:</strong> Ask us to correct inaccurate or incomplete data.</li>
+            <li><strong>Deletion:</strong> Request erasure of your personal data ("right to be forgotten").</li>
+            <li><strong>Portability:</strong> Export your expense data in a machine-readable format.</li>
+            <li><strong>Restriction:</strong> Ask us to limit how we process your data in certain circumstances.</li>
+            <li><strong>Objection:</strong> Object to processing based on legitimate interests.</li>
+            <li><strong>Withdraw consent:</strong> Where processing is based on consent, withdraw it at any time.</li>
+        </ul>
+        <p>
+            To exercise any of these rights, email us at
+            <a href="mailto:privacy@spendly.app" style="color:var(--accent);text-decoration:underline;">privacy@spendly.app</a>.
+            We will respond within 30 days.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>9. Cookies</h2>
+        <p>
+            Spendly uses a single session cookie to keep you logged in. We do not use advertising cookies or third-party tracking cookies. You can disable cookies in your browser settings, but doing so will prevent you from staying logged in.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>10. Children's Privacy</h2>
+        <p>
+            The Service is not directed at children under the age of 13. We do not knowingly collect personal data from children. If you believe a child has provided us with personal data, please contact us and we will delete it promptly.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>11. Third-Party Links</h2>
+        <p>
+            The Service may contain links to external websites. We are not responsible for the privacy practices of those sites and encourage you to review their privacy policies separately.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>12. Changes to This Policy</h2>
+        <p>
+            We may update this Privacy Policy periodically. When we do, we will revise the "Last updated" date at the top. For material changes, we will notify you by email or a prominent notice within the Service.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>13. Contact Us</h2>
+        <p>
+            For any privacy-related questions or requests, please reach out to us at
+            <a href="mailto:privacy@spendly.app" style="color:var(--accent);text-decoration:underline;">privacy@spendly.app</a>.
+        </p>
+    </div>
+
+</div>
+{% endblock %}

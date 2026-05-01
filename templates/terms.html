@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+
+{% block title %}Terms and Conditions — Spendly{% endblock %}
+
+{% block head %}
+<style>
+    .legal-page {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 4rem 2rem 6rem;
+    }
+    .legal-page h1 {
+        font-family: var(--font-display);
+        font-size: 2.4rem;
+        color: var(--ink);
+        margin-bottom: 0.5rem;
+    }
+    .legal-meta {
+        font-size: 0.85rem;
+        color: var(--ink-muted);
+        margin-bottom: 3rem;
+        padding-bottom: 1.5rem;
+        border-bottom: 1px solid var(--border);
+    }
+    .legal-section {
+        margin-bottom: 2.5rem;
+    }
+    .legal-section h2 {
+        font-family: var(--font-display);
+        font-size: 1.25rem;
+        color: var(--ink);
+        margin-bottom: 0.75rem;
+    }
+    .legal-section p,
+    .legal-section li {
+        font-size: 0.95rem;
+        color: var(--ink-soft);
+        line-height: 1.75;
+        margin-bottom: 0.6rem;
+    }
+    .legal-section ul {
+        padding-left: 1.4rem;
+    }
+    .legal-section ul li {
+        margin-bottom: 0.4rem;
+    }
+    .legal-highlight {
+        background: var(--accent-light);
+        border-left: 3px solid var(--accent);
+        padding: 1rem 1.25rem;
+        border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+        color: var(--ink-soft);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="legal-page">
+
+    <h1>Terms and Conditions</h1>
+    <p class="legal-meta">Effective date: 1 May 2026 &nbsp;·&nbsp; Last updated: 1 May 2026</p>
+
+    <div class="legal-highlight">
+        Please read these Terms and Conditions carefully before using Spendly. By creating an account or using the service, you agree to be bound by these terms.
+    </div>
+
+    <div class="legal-section">
+        <h2>1. Acceptance of Terms</h2>
+        <p>
+            By accessing or using Spendly ("the Service"), you confirm that you are at least 18 years of age, have read and understood these Terms, and agree to be bound by them. If you do not agree, please do not use the Service.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>2. Description of Service</h2>
+        <p>
+            Spendly is a personal finance tracking application that allows registered users to log, categorise, and review their expenses. The Service is provided for personal, non-commercial use only.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>3. User Accounts</h2>
+        <ul>
+            <li>You must provide accurate and complete information when registering.</li>
+            <li>You are responsible for maintaining the confidentiality of your login credentials.</li>
+            <li>You are solely responsible for all activity that occurs under your account.</li>
+            <li>Notify us immediately if you suspect unauthorised access to your account.</li>
+            <li>We reserve the right to suspend or terminate accounts that violate these Terms.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>4. Acceptable Use</h2>
+        <p>You agree not to:</p>
+        <ul>
+            <li>Use the Service for any unlawful purpose or in violation of applicable laws.</li>
+            <li>Attempt to gain unauthorised access to any part of the Service or its infrastructure.</li>
+            <li>Upload or transmit malicious code, viruses, or harmful content.</li>
+            <li>Reverse-engineer, decompile, or disassemble any part of the Service.</li>
+            <li>Use automated scripts or bots to access the Service without prior written consent.</li>
+            <li>Impersonate any person or entity or misrepresent your affiliation with any person or entity.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>5. Financial Data Disclaimer</h2>
+        <p>
+            Spendly is a personal record-keeping tool only. It does not provide financial advice, investment recommendations, tax guidance, or any professional financial services. All expense data you enter is self-reported and used solely to display information back to you.
+        </p>
+        <p>
+            We strongly encourage you to consult a qualified financial advisor for decisions relating to budgeting, investments, or tax planning.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>6. Data Ownership</h2>
+        <p>
+            You retain full ownership of the expense data you enter into Spendly. We do not sell, rent, or share your personal financial data with third parties for marketing purposes. See our <a href="{{ url_for('privacy') }}" style="color:var(--accent);text-decoration:underline;">Privacy Policy</a> for full details on how we handle your data.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>7. Data Export and Deletion</h2>
+        <ul>
+            <li>You may export your expense data at any time from within the application.</li>
+            <li>You may request deletion of your account and all associated data by contacting us.</li>
+            <li>Upon deletion, your data will be permanently removed within 30 days.</li>
+        </ul>
+    </div>
+
+    <div class="legal-section">
+        <h2>8. Availability and Service Changes</h2>
+        <p>
+            We aim to keep Spendly available at all times but do not guarantee uninterrupted access. We reserve the right to modify, suspend, or discontinue any part of the Service at any time with reasonable notice where practicable.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>9. Limitation of Liability</h2>
+        <p>
+            To the fullest extent permitted by law, Spendly and its creators shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service, including loss of data or financial loss.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>10. Indemnification</h2>
+        <p>
+            You agree to indemnify and hold harmless Spendly and its operators from any claims, damages, losses, or expenses (including legal fees) arising out of your use of the Service or violation of these Terms.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>11. Governing Law</h2>
+        <p>
+            These Terms shall be governed by and construed in accordance with the laws of India. Any disputes arising under these Terms shall be subject to the exclusive jurisdiction of the courts located in India.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>12. Changes to These Terms</h2>
+        <p>
+            We may update these Terms from time to time. When we do, we will revise the "Last updated" date above. Continued use of the Service after changes are posted constitutes your acceptance of the revised Terms.
+        </p>
+    </div>
+
+    <div class="legal-section">
+        <h2>13. Contact</h2>
+        <p>
+            If you have any questions about these Terms, please contact us at
+            <a href="mailto:support@spendly.app" style="color:var(--accent);text-decoration:underline;">support@spendly.app</a>.
+        </p>
+    </div>
+
+</div>
+{% endblock %}
