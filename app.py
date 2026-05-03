@@ -69,7 +69,7 @@ def login():
     session["user_id"] = user["id"]
     session["user_name"] = user["name"]
 
-    return redirect(url_for("landing"))
+    return redirect(url_for("profile"))
 
 
 # ------------------------------------------------------------------ #
@@ -84,7 +84,41 @@ def logout():
 
 @app.route("/profile")
 def profile():
-    return "Profile page — coming in Step 4"
+    if not session.get("user_id"):
+        return redirect(url_for("login"))
+
+    user = {
+        "name": "Demo User",
+        "email": "demo@spendly.com",
+        "member_since": "January 2025",
+    }
+
+    stats = {
+        "total_spent": 336.25,
+        "transaction_count": 8,
+        "top_category": "Food",
+    }
+
+    transactions = [
+        {"date": "May 22, 2026", "description": "Restaurant dinner",        "category": "Food",          "amount": 22.75},
+        {"date": "May 18, 2026", "description": "Miscellaneous",             "category": "Other",         "amount": 10.00},
+        {"date": "May 15, 2026", "description": "New shoes",                 "category": "Shopping",      "amount": 60.00},
+        {"date": "May 12, 2026", "description": "Streaming subscriptions",   "category": "Entertainment", "amount": 25.00},
+        {"date": "May 08, 2026", "description": "Pharmacy",                  "category": "Health",        "amount": 35.00},
+    ]
+
+    categories = [
+        {"name": "Bills",         "total": 120.00, "percent": 36},
+        {"name": "Shopping",      "total":  60.00, "percent": 18},
+        {"name": "Transport",     "total":  45.00, "percent": 13},
+        {"name": "Health",        "total":  35.00, "percent": 10},
+        {"name": "Entertainment", "total":  25.00, "percent":  7},
+        {"name": "Food",          "total":  41.25, "percent": 12},
+        {"name": "Other",         "total":  10.00, "percent":  3},
+    ]
+
+    return render_template("profile.html", user=user, stats=stats,
+                           transactions=transactions, categories=categories)
 
 
 @app.route("/expenses/add")

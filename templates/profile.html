@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block title %}Profile — Spendly{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="profile-wrapper">
+
+  <!-- User info card -->
+  <section class="profile-header">
+    <div class="profile-avatar" aria-hidden="true">
+      {{ user.name[:2].upper() }}
+    </div>
+    <div class="profile-meta">
+      <h1 class="profile-name">{{ user.name }}</h1>
+      <p class="profile-email">{{ user.email }}</p>
+      <p class="profile-since">Member since {{ user.member_since }}</p>
+    </div>
+  </section>
+
+  <!-- Summary stats -->
+  <section class="stats-row" aria-label="Spending summary">
+    <div class="stat-card">
+      <span class="stat-value">₹{{ "%.2f"|format(stats.total_spent) }}</span>
+      <span class="stat-label">Total Spent</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ stats.transaction_count }}</span>
+      <span class="stat-label">Transactions</span>
+    </div>
+    <div class="stat-card">
+      <span class="stat-value">{{ stats.top_category }}</span>
+      <span class="stat-label">Top Category</span>
+    </div>
+  </section>
+
+  <div class="profile-grid">
+
+    <!-- Transaction history -->
+    <section class="profile-section">
+      <h2 class="section-title">Recent Transactions</h2>
+      <div class="table-wrap">
+        <table class="transactions-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Description</th>
+              <th>Category</th>
+              <th class="col-amount">Amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for tx in transactions %}
+            <tr>
+              <td class="col-date">{{ tx.date }}</td>
+              <td>{{ tx.description }}</td>
+              <td>
+                <span class="badge badge--{{ tx.category | lower | replace(' ', '-') }}">
+                  {{ tx.category }}
+                </span>
+              </td>
+              <td class="col-amount tx-amount">₹{{ "%.2f"|format(tx.amount) }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Category breakdown -->
+    <section class="profile-section">
+      <h2 class="section-title">Spending by Category</h2>
+      <ul class="category-list" role="list">
+        {% for cat in categories %}
+        <li class="category-row">
+          <div class="category-header">
+            <span class="category-name">{{ cat.name }}</span>
+            <span class="category-amount">₹{{ "%.2f"|format(cat.total) }}</span>
+          </div>
+          <div class="bar-track" role="progressbar"
+               aria-valuenow="{{ cat.percent }}" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar-fill bar-fill--{{ cat.name | lower | replace(' ', '-') }}"
+                 style="--bar-pct: {{ cat.percent }}%"></div>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </section>
+
+  </div><!-- /.profile-grid -->
+</div><!-- /.profile-wrapper -->
+{% endblock %}
