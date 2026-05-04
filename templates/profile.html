@@ -21,6 +21,31 @@
     </div>
   </section>
 
+  <!-- Date range filter -->
+  <section class="filter-bar">
+    <form class="filter-form" method="GET" action="{{ url_for('profile') }}">
+      <div class="filter-fields">
+        <div class="filter-field">
+          <label for="from_date">From</label>
+          <input type="date" id="from_date" name="from_date"
+                 class="form-input filter-input"
+                 value="{{ from_date }}">
+        </div>
+        <div class="filter-field">
+          <label for="to_date">To</label>
+          <input type="date" id="to_date" name="to_date"
+                 class="form-input filter-input"
+                 value="{{ to_date }}">
+        </div>
+      </div>
+      <div class="filter-actions">
+        <button type="submit" class="btn-primary">Filter</button>
+        <a href="{{ url_for('profile') }}" class="btn-ghost">Clear</a>
+      </div>
+    </form>
+    <p class="filter-label">Showing: {{ filter_label }}</p>
+  </section>
+
   <!-- Summary stats -->
   <section class="stats-row" aria-label="Spending summary">
     <div class="stat-card">

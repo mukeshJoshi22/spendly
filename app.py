@@ -1,7 +1,7 @@
 import os
 from datetime import datetime
 
-from flask import Flask, redirect, render_template, request, session, url_for
+from flask import Flask, flash, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
 from database.db import (create_user, get_db, get_user_by_email,
@@ -71,6 +71,7 @@ def login():
     session["user_id"] = user["id"]
     session["user_name"] = user["name"]
 
+    flash("Login successful! Welcome back, " + user["name"] + ".", "success")
     return redirect(url_for("profile"))
 
 
@@ -94,7 +95,31 @@ def profile():
         session.clear()
         return redirect(url_for("login"))
 
-    expenses = get_user_expenses(session["user_id"])
+    raw_from = request.args.get("from_date", "").strip()
+    raw_to   = request.args.get("to_date",   "").strip()
+
+    from_date = None
+    to_date   = None
+
+    if raw_from:
+        try:
+            datetime.strptime(raw_from, "%Y-%m-%d")
+            from_date = raw_from
+        except ValueError:
+            pass
+
+    if raw_to:
+        try:
+            datetime.strptime(raw_to, "%Y-%m-%d")
+            to_date = raw_to
+        except ValueError:
+            pass
+
+    if from_date and to_date and from_date > to_date:
+        from_date = None
+        to_date   = None
+
+    expenses = get_user_expenses(session["user_id"], from_date=from_date, to_date=to_date)
 
     total_spent = sum(e["amount"] for e in expenses)
     transaction_count = len(expenses)
@@ -145,8 +170,17 @@ def profile():
         for e in expenses
     ]
 
+    if from_date and to_date:
+        fmt_from = datetime.strptime(from_date, "%Y-%m-%d").strftime("%B %-d, %Y")
+        fmt_to   = datetime.strptime(to_date,   "%Y-%m-%d").strftime("%B %-d, %Y")
+        filter_label = f"{fmt_from} – {fmt_to}"
+    else:
+        filter_label = "All time"
+
     return render_template("profile.html", user=user, stats=stats,
-                           transactions=transactions, categories=categories)
+                           transactions=transactions, categories=categories,
+                           from_date=from_date or "", to_date=to_date or "",
+                           filter_label=filter_label)
 
 
 @app.route("/expenses/add")
