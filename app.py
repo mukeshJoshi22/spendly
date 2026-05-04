@@ -1,9 +1,11 @@
 import os
+from datetime import datetime
 
 from flask import Flask, redirect, render_template, request, session, url_for
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from database.db import create_user, get_db, get_user_by_email, init_db, seed_db
+from database.db import (create_user, get_db, get_user_by_email,
+                         get_user_by_id, get_user_expenses, init_db, seed_db)
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-key")
@@ -87,34 +89,60 @@ def profile():
     if not session.get("user_id"):
         return redirect(url_for("login"))
 
+    db_user = get_user_by_id(session["user_id"])
+    if not db_user:
+        session.clear()
+        return redirect(url_for("login"))
+
+    expenses = get_user_expenses(session["user_id"])
+
+    total_spent = sum(e["amount"] for e in expenses)
+    transaction_count = len(expenses)
+
+    category_totals = {}
+    for e in expenses:
+        category_totals[e["category"]] = category_totals.get(e["category"], 0) + e["amount"]
+
+    top_category = max(category_totals, key=category_totals.get) if category_totals else "—"
+
+    categories = sorted(
+        [
+            {
+                "name": name,
+                "total": round(total, 2),
+                "percent": round(total / total_spent * 100) if total_spent else 0,
+            }
+            for name, total in category_totals.items()
+        ],
+        key=lambda c: c["total"],
+        reverse=True,
+    )
+
+    try:
+        member_since = datetime.strptime(db_user["created_at"], "%Y-%m-%d %H:%M:%S").strftime("%B %Y")
+    except (ValueError, TypeError):
+        member_since = "—"
+
     user = {
-        "name": "Demo User",
-        "email": "demo@spendly.com",
-        "member_since": "January 2025",
+        "name": db_user["name"],
+        "email": db_user["email"],
+        "member_since": member_since,
     }
 
     stats = {
-        "total_spent": 336.25,
-        "transaction_count": 8,
-        "top_category": "Food",
+        "total_spent": round(total_spent, 2),
+        "transaction_count": transaction_count,
+        "top_category": top_category,
     }
 
     transactions = [
-        {"date": "May 22, 2026", "description": "Restaurant dinner",        "category": "Food",          "amount": 22.75},
-        {"date": "May 18, 2026", "description": "Miscellaneous",             "category": "Other",         "amount": 10.00},
-        {"date": "May 15, 2026", "description": "New shoes",                 "category": "Shopping",      "amount": 60.00},
-        {"date": "May 12, 2026", "description": "Streaming subscriptions",   "category": "Entertainment", "amount": 25.00},
-        {"date": "May 08, 2026", "description": "Pharmacy",                  "category": "Health",        "amount": 35.00},
-    ]
-
-    categories = [
-        {"name": "Bills",         "total": 120.00, "percent": 36},
-        {"name": "Shopping",      "total":  60.00, "percent": 18},
-        {"name": "Transport",     "total":  45.00, "percent": 13},
-        {"name": "Health",        "total":  35.00, "percent": 10},
-        {"name": "Entertainment", "total":  25.00, "percent":  7},
-        {"name": "Food",          "total":  41.25, "percent": 12},
-        {"name": "Other",         "total":  10.00, "percent":  3},
+        {
+            "date": datetime.strptime(e["date"], "%Y-%m-%d").strftime("%b %-d, %Y"),
+            "description": e["description"] or "",
+            "category": e["category"],
+            "amount": e["amount"],
+        }
+        for e in expenses
     ]
 
     return render_template("profile.html", user=user, stats=stats,
